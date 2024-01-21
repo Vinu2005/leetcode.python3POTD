@@ -1,0 +1,10 @@
+class Solution:
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
+        occurrence_count = {}
+
+        # Count occurrences of each value in arr
+        for num in arr:
+            occurrence_count[num] = occurrence_count.get(num, 0) + 1
+
+        # Check if the number of occurrences is unique
+        return len(occurrence_count.values()) == len(set(occurrence_count.values()))
