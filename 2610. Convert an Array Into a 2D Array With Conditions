@@ -1,0 +1,23 @@
+class Solution:
+    def findMatrix(self, nums: List[int]) -> List[List[int]]:
+        nums.sort(reverse=True)
+        
+        result = []
+        
+        for num in nums:
+            # Find a row where num doesn't exist
+            found = False
+            for row in result:
+                if num not in row:
+                    row.append(num)
+                    found = True
+                    break
+            
+            # If num doesn't fit in any existing row, create a new row
+            if not found:
+                result.append([num])
+        
+        return result
+        
+        
+        
