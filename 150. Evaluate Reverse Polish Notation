@@ -1,0 +1,28 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+
+        for token in tokens:
+            if token.isdigit() or (token[0] == '-' and token[1:].isdigit()):
+                stack.append(int(token))
+            else:
+                operand2 = stack.pop()
+                operand1 = stack.pop()
+                result = self.perform_operation(operand1, operand2, token)
+                stack.append(result)
+
+        return stack[0]
+
+    def perform_operation(self, operand1: int, operand2: int, operator: str) -> int:
+        if operator == "+":
+            return operand1 + operand2
+        elif operator == "-":
+            return operand1 - operand2
+        elif operator == "*":
+            return operand1 * operand2
+        elif operator == "/":
+            # Handle division by zero
+            if operand2 == 0:
+                return 0
+            return int(operand1 / operand2)
+        
