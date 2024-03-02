@@ -1,0 +1,9 @@
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        # Square each number in the array
+        squares = [num * num for num in nums]
+        # Sort the squared array
+        squares.sort()
+        return squares
+
+        
