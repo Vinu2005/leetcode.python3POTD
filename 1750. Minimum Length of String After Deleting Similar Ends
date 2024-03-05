@@ -1,0 +1,23 @@
+class Solution:
+    def minimumLength(self, s: str) -> int:
+        # Initialize pointers
+        left, right = 0, len(s) - 1
+        
+        # Loop until left and right pointers meet or cross
+        while left < right:
+            # If the characters at left and right pointers are the same, move pointers inward
+            if s[left] == s[right]:
+                char = s[left]
+                # Move left pointer to the right until it's at a different character
+                while left <= right and s[left] == char:
+                    left += 1
+                # Move right pointer to the left until it's at a different character
+                while right >= left and s[right] == char:
+                    right -= 1
+            else:
+                # If characters at left and right pointers are different, break the loop
+                break
+        
+        # Calculate the length of the remaining string
+        return max(0, right - left + 1)
+        
