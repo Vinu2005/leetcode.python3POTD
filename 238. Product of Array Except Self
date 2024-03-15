@@ -1,0 +1,25 @@
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        
+        # Initialize two arrays to store the product of prefixes and suffixes
+        prefix_products = [1] * n
+        suffix_products = [1] * n
+        
+        # Compute the product of prefixes
+        prefix_product = 1
+        for i in range(n):
+            prefix_products[i] = prefix_product
+            prefix_product *= nums[i]
+        
+        # Compute the product of suffixes
+        suffix_product = 1
+        for i in range(n - 1, -1, -1):
+            suffix_products[i] = suffix_product
+            suffix_product *= nums[i]
+        
+        # Compute the final result using prefix and suffix products
+        result = [prefix_products[i] * suffix_products[i] for i in range(n)]
+        
+        return result
+        
