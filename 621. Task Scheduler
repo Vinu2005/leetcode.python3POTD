@@ -1,0 +1,12 @@
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        task_counts = Counter(tasks)
+        max_count = max(task_counts.values())
+        max_count_tasks = sum(1 for count in task_counts.values() if count == max_count)
+        
+        # Calculate the number of intervals required without considering idle time
+        intervals_without_idle = (max_count - 1) * (n + 1) + max_count_tasks
+        
+        # If there are more tasks than the intervals calculated, we need to consider idle time
+        return max(len(tasks), intervals_without_idle)
+        
