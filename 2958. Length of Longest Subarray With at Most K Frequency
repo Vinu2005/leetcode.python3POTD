@@ -1,0 +1,18 @@
+class Solution:
+    def maxSubarrayLength(self, nums: List[int], k: int) -> int:
+        mp = {}
+        n = len(nums)
+        l, r, cnt = 0, 0, 0
+        while r < n:
+            cur = nums[r]
+            r += 1
+            if cur in mp:
+                mp[cur] += 1
+            else:
+                mp[cur] = 1
+            while l < r and mp[cur] > k:
+                mp[nums[l]] -= 1
+                l += 1
+            cnt = max(cnt, r - l)
+        return cnt
+        
