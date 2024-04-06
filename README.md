@@ -20,9 +20,13 @@ The primary motivation behind this project is continuous learning and skill deve
 **To get started with your own Daily POTD streak on LEETCODE, follow these steps:**
 
 Sign up for an account on LEETCODE if you haven't already.
+
 Access the Daily Problem of the Day section and start solving the problems.
+
 Create a GitHub repository to document your streak and track your progress.
+
 Customize the README file to share your experience, feedback, and suggestions.
+
 Commit your solutions daily and update the streak counter in your repository.
 
 **Feedback and Contributions**
