@@ -1,0 +1,26 @@
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        stack = []
+        remove_indices = set()
+        
+        # Iterate through the string
+        for i, char in enumerate(s):
+            if char == '(':
+                stack.append(i)  # Push index of '(' to stack
+            elif char == ')':
+                if stack:  # If there is a corresponding '('
+                    stack.pop()  # Remove '(' from stack
+                else:
+                    remove_indices.add(i)  # Mark ')' for removal
+        
+        # Mark unmatched '(' for removal
+        remove_indices.update(stack)
+        
+        # Construct the final string
+        result = ""
+        for i, char in enumerate(s):
+            if i not in remove_indices:
+                result += char
+                
+        return result
+        
