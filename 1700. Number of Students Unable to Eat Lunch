@@ -1,0 +1,13 @@
+class Solution:
+    def countStudents(self, students: List[int], sandwiches: List[int]) -> int:
+        preference_count = [0, 0]  # Count of preferences
+        for preference in students:
+            preference_count[preference] += 1
+
+        for sandwich in sandwiches:
+            if preference_count[sandwich] == 0:
+                break  # No students prefer this sandwich
+            preference_count[sandwich] -= 1
+
+        return sum(preference_count)
+        
