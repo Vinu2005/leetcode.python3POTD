@@ -1,0 +1,24 @@
+class Solution:
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        # Create adjacency list from edges
+        graph = defaultdict(list)
+        for u, v in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+
+        # Initialize visited set and queue for BFS
+        visited = set()
+        queue = deque([source])
+
+        # Perform BFS
+        while queue:
+            current = queue.popleft()
+            if current == destination:
+                return True
+            visited.add(current)
+            for neighbor in graph[current]:
+                if neighbor not in visited:
+                    queue.append(neighbor)
+
+        return False
+        
