@@ -1,0 +1,27 @@
+class Solution:
+    def findRotateSteps(self, ring: str, key: str) -> int:
+        memo = {}  # Memoization dictionary to store intermediate results
+        
+        def dp(i: int, j: int) -> int:
+            if i == len(key):  # Base case: all characters in key are spelled
+                return 0
+            if (i, j) in memo:  # If result is already memoized
+                return memo[(i, j)]
+            
+            # Find the shortest path to align key[i] with the character at ring[j]
+            min_steps = float('inf')
+            for k in range(len(ring)):
+                if ring[k] == key[i]:
+                    # Calculate the steps required to align key[i] with ring[k]
+                    steps_to_align = min(abs(k - j), len(ring) - abs(k - j))
+                    # Recursively find the minimum steps for the next characters in key
+                    next_steps = dp(i + 1, k)
+                    # Update min_steps with the minimum of current alignment and next alignments
+                    min_steps = min(min_steps, steps_to_align + next_steps)
+            
+            memo[(i, j)] = min_steps  # Memoize the result
+            return min_steps
+        
+        # Start the dynamic programming process from the beginning of the key
+        return dp(0, 0) + len(key)  # Add the length of key for the center button press at each step
+        
