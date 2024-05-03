@@ -1,0 +1,21 @@
+class Solution:
+    def compareVersion(self, version1: str, version2: str) -> int:
+         # Split versions into revisions
+        revisions1 = version1.split('.')
+        revisions2 = version2.split('.')
+        
+        # Compare revisions pair-wise
+        for i in range(max(len(revisions1), len(revisions2))):
+            # Convert revisions to integers, treat missing revisions as 0
+            rev1 = int(revisions1[i]) if i < len(revisions1) else 0
+            rev2 = int(revisions2[i]) if i < len(revisions2) else 0
+            
+            # Compare revisions
+            if rev1 < rev2:
+                return -1
+            elif rev1 > rev2:
+                return 1
+        
+        # Both versions are equal
+        return 0
+        
