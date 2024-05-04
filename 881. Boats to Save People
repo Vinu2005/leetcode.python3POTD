@@ -1,0 +1,14 @@
+class Solution:
+    def numRescueBoats(self, people: List[int], limit: int) -> int:
+        people.sort()  # Sort the array of people
+        boats = 0  # Initialize the number of boats needed
+        left, right = 0, len(people) - 1  # Initialize pointers
+        
+        while left <= right:  # Loop until both pointers meet or cross each other
+            if people[left] + people[right] <= limit:
+                left += 1  # Fit both persons onto the boat
+            right -= 1  # Move the pointer of the heaviest person to the left
+            boats += 1  # Increment the number of boats used
+        
+        return boats  # Return the minimum number of boats required
+        
