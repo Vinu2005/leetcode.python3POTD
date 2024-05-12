@@ -1,0 +1,28 @@
+class Solution:
+    def kthSmallestPrimeFraction(self, arr: List[int], k: int) -> List[int]:
+        def count_fractions(x):
+            count = 0
+            max_fraction = 0
+            max_fraction_idx = None
+            j = 0
+            for i in range(len(arr) - 1):
+                while j < len(arr) and arr[i] > x * arr[j]:
+                    j += 1
+                if j == len(arr):
+                    break
+                count += len(arr) - j
+                if j < len(arr) and max_fraction < arr[i] / arr[j]:
+                    max_fraction = arr[i] / arr[j]
+                    max_fraction_idx = (i, j)
+            return count, max_fraction, max_fraction_idx
+
+        left, right = 0, 1
+        while True:
+            mid = (left + right) / 2
+            count, max_fraction, max_fraction_idx = count_fractions(mid)
+            if count == k:
+                return [arr[max_fraction_idx[0]], arr[max_fraction_idx[1]]]
+            elif count < k:
+                left = mid
+            else:
+                right = mid
