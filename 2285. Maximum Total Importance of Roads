@@ -1,0 +1,23 @@
+class Solution:
+    def maximumImportance(self, n: int, roads: List[List[int]]) -> int:
+        # Step 1: Count the number of connections for each city
+        connections = defaultdict(int)
+        for a, b in roads:
+            connections[a] += 1
+            connections[b] += 1
+        
+        # Step 2: Sort the cities by number of connections in descending order
+        sorted_cities = sorted(connections.keys(), key=lambda x: -connections[x])
+        
+        # Step 3: Assign values to the cities based on their sorted order
+        values = [0] * n
+        for i, city in enumerate(sorted_cities):
+            values[city] = n - i
+        
+        # Step 4: Calculate the total importance of all roads
+        total_importance = 0
+        for a, b in roads:
+            total_importance += values[a] + values[b]
+        
+        return total_importance
+        
