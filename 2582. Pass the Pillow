@@ -1,0 +1,11 @@
+class Solution:
+    def passThePillow(self, n: int, time: int) -> int:
+        if time > n:
+            direction = int(time/(n-1)) # used to find direction, if odd then its going for reverse direction ---- direction = 5/(4-1) = 1
+            remaning_time = time % (n-1) # used to find the remaning time after reaching last or first place ---- remaning_time = 5 % 3 = 2
+            return n - remaning_time  if direction % 2 != 0 else 1 + remaning_time # if direction is odd, then the direction is reverse, so we do n - remaning_time, else 1 + remaning_time ---- return 2
+        elif time == n:
+            return n-1
+        else:
+            return 1 + time
+        
