@@ -1,0 +1,27 @@
+class Solution:
+    def maximumGain(self, s: str, x: int, y: int) -> int:
+        def process(stack, s, pattern, points):
+            for char in s:
+                if stack and stack[-1] == pattern[0] and char == pattern[1]:
+                    stack.pop()
+                    points[0] += points[1]
+                else:
+                    stack.append(char)
+            return stack
+        
+        points = [0, 0]
+        if x > y:
+            points[1] = x
+            stack = []
+            stack = process(stack, s, "ab", points)
+            points[1] = y
+            stack = process([], ''.join(stack), "ba", points)
+        else:
+            points[1] = y
+            stack = []
+            stack = process(stack, s, "ba", points)
+            points[1] = x
+            stack = process([], ''.join(stack), "ab", points)
+        
+        return points[0]
+        
