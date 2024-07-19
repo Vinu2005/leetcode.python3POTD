@@ -1,0 +1,5 @@
+colMax = set(map(max,zip(*matrix)))
+        
+        for row in matrix:
+            mn = min(row)
+            if mn in colMax: return [mn]
