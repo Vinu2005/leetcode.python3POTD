@@ -1,0 +1,51 @@
+class Solution:
+    def buildMatrix(self, k: int, rowConditions: List[List[int]], colConditions: List[List[int]]) -> List[List[int]]:
+        row = self.topoSort(rowConditions, k)
+        col = self.topoSort(colConditions, k)
+
+        if len(row) != k or len(col) != k:
+            return []
+
+        dic = {}
+        for i in range(len(row)):
+            r = row[i]
+            dic[r] = [i, -1]
+
+        for i in range(len(col)):
+            c = col[i]
+            dic[c][1] = i
+        
+        ans = [([0] * k) for i in range(k)]
+        for i in dic:
+            ans[dic[i][0]][dic[i][1]] = i
+
+        return ans
+
+
+    def topoSort(self, conditions, k):
+        indeg = [0 for _ in range(k + 1)]
+        edges = [[] for _ in range(k + 1)]
+
+        for a, b in conditions:
+            edges[a].append(b)
+            indeg[b] += 1
+
+        q = deque()
+        for i in range(1, len(indeg)):
+            if indeg[i] == 0:
+                q.append(i)
+
+        result = []
+        while q:
+            node = q.popleft()
+            result.append(node)
+            for nei in edges[node]:
+                indeg[nei] -= 1
+                if indeg[nei] == 0:
+                    q.append(nei)
+
+        if len(q) != 0:
+            return []
+
+        return result
+        
