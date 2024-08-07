@@ -1,0 +1,115 @@
+class Solution:
+    def numberToWords(self, num: int) -> str:
+        if num == 0:
+            return "Zero"
+
+        def one(num):
+            if num == 0:
+                return ''
+            elif num == 1:
+                return 'One'
+            elif num == 2:
+                return 'Two'
+            elif num == 3:
+                return 'Three'
+            elif num == 4:
+                return 'Four'
+            elif num == 5:
+                return 'Five'
+            elif num == 6:
+                return 'Six'
+            elif num == 7:
+                return 'Seven'
+            elif num == 8:
+                return 'Eight'
+            elif num == 9:
+                return 'Nine'
+
+        def two_less_than_20(num):
+            if num == 10:
+                return 'Ten'
+            elif num == 11:
+                return 'Eleven'
+            elif num == 12:
+                return 'Twelve'
+            elif num == 13:
+                return 'Thirteen'
+            elif num == 14:
+                return 'Fourteen'
+            elif num == 15:
+                return 'Fifteen'
+            elif num == 16:
+                return 'Sixteen'
+            elif num == 17:
+                return 'Seventeen'
+            elif num == 18:
+                return 'Eighteen'
+            elif num == 19:
+                return 'Nineteen'
+
+        def ten(num):
+            if num >= 90:
+                return 'Ninety'
+            elif num >= 80:
+                return 'Eighty'
+            elif num >= 70:
+                return 'Seventy'
+            elif num >= 60:
+                return 'Sixty'
+            elif num >= 50:
+                return 'Fifty'
+            elif num >= 40:
+                return 'Forty'
+            elif num >= 30:
+                return 'Thirty'
+            elif num >= 20:
+                return 'Twenty'
+
+        def two(num):
+            if num == 0:
+                return ''
+            elif num < 10:
+                return one(num)
+            elif num < 20:
+                return two_less_than_20(num)
+            else:
+                tenner = ten(num)
+                rest = one(num % 10)
+                if rest:
+                    return tenner + ' ' + rest
+                else:
+                    return tenner
+
+        def three(num):
+            hundred = num // 100
+            rest = num % 100
+            if hundred and rest:
+                return one(hundred) + ' Hundred ' + two(rest)
+            elif not hundred and rest:
+                return two(rest)
+            elif hundred and not rest:
+                return one(hundred) + ' Hundred'
+
+        billion = num // 1000000000
+        million = (num % 1000000000) // 1000000
+        thousand = (num % 1000000) // 1000
+        rest = num % 1000
+
+        result = ''
+        if billion:
+            result += three(billion) + ' Billion'
+        if million:
+            if result:
+                result += ' '
+            result += three(million) + ' Million'
+        if thousand:
+            if result:
+                result += ' '
+            result += three(thousand) + ' Thousand'
+        if rest:
+            if result:
+                result += ' '
+            result += three(rest)
+
+        return result
+        
